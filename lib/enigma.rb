@@ -30,6 +30,12 @@ class Enigma
   end
 
   def time_used_for_offset
-    time = Time.now.to_i
+    time = Time.now.strftime("%m%d%y")
+    offset = (time.to_i ** 2).to_s.split(//).last(4).join
+    return offset.each_char.map(&:to_i)
+  end
+
+  def generate_shift_amount_for_a_rotation_and_offset(rotate_a), time_used_for_offset)
+
   end
 end
