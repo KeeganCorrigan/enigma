@@ -5,13 +5,10 @@ class Enigma
 
   end
 
-def generate_key
-  key =
-  number_array = [0..9]
-  5.times do
-    key << numer_array.sample.to_s
+  def generate_key
+    key = []
+    5.times do
+    key.join << rand(0..9)
+    end
   end
-end
-
-
 end

@@ -17,4 +17,11 @@ class EnigmaTest < Minitest::Test
     assert_equal 5, e.generate_key.length
     assert_equal String, e.generate_key.class
   end
+
+  def test_rotate_works_on_key
+    e = Enigma.new
+    assert_equal 5, e.generate_key.length
+    assert_equal String, e.generate_key.class
+  end
+
 end
