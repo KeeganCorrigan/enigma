@@ -29,11 +29,6 @@ class EnigmaTest < Minitest::Test
     assert_equal String, e.generate_key.class
   end
 
-  def test_rotate_works_on_a_key
-    e = Enigma.new
-    assert_equal [[1,2],[2,3],[3, 4], [4, 5]], e.rotater("12345")
-  end
-
   def test_generate_offset
     e = Enigma.new
     assert_equal 4, e.time_used_for_offset.length
