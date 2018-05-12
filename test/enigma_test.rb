@@ -69,7 +69,9 @@ class EnigmaTest < Minitest::Test
 
   def test_assigns_new_letter_based_on_char_map_index
     e = Enigma.new("12345")
+    message_char_map_indexes = [14, 9]
 
+    assert_equal "ni", e.encrypt(message_char_map_indexes)
   end
 
 end

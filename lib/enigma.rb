@@ -73,5 +73,6 @@ class Enigma
     end
     return second_shifted_array
   end
+  
 
 end
