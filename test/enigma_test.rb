@@ -38,4 +38,21 @@ class EnigmaTest < Minitest::Test
     e.rotater("12345")
     assert_equal [15, 28, 36, 49], e.generate_shift_array
   end
+
+  def test_encrypts_single_char
+    skip
+    e = Enigma.new("12345")
+    shifted_array = [14, 4]
+    message = "b"
+    assert_equal "p", e.encrypt_message(message, shifted_array)
+  end
+
+  def test_encrypts_two_char
+    e = Enigma.new("12345")
+    shifted_array = [14, 4]
+    message = "af"
+    assert_equal "of", e.encrypt_message(message, shifted_array)
+  end
+
+
 end
