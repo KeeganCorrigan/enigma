@@ -2,13 +2,15 @@ require 'pry'
 
 class Enigma
 
-  attr_reader :key
-              :message_to_encrypt
-              :rotated_array
+  attr_reader :key,
+              :message_to_encrypt,
+              :rotated_array,
+              :shifted_array
 
   def initialize(message_to_encrypt = "", key = generate_key)
     @key = nil
     @rotated_array = []
+    @shifted_array = []
   end
 
   def generate_key
@@ -42,10 +44,18 @@ class Enigma
     shifted_array = []
     x = -1
     4.times do
-      binding.pry
       x += 1
       shifted_array << @rotated_array[x].flatten.join.to_i + time_used_for_offset[x]
     end
     return shifted_array
   end
+
+  def encrypt_message(message, shifted_array)
+    char_map = ('a'..'z').to_a + ('0'..'9').to_a
+    new_new = char_map.each_index.select do |index|
+      char_map[index] == message
+    end
+    return char_map[new_new[0] + shifted_array[0]]
+  end
+
 end

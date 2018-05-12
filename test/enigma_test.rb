@@ -40,10 +40,12 @@ class EnigmaTest < Minitest::Test
     assert_equal [15, 28, 36, 49], e.generate_shift_array
   end
 
-  def test_finds_message_in_char_map
+  def test_encrypts_single_char
     e = Enigma.new("12345")
     shifted_array = [14, 4]
-    message = "a"
-    assert_equal "o", e.find_char(message, shifted_array)
+    message = "b"
+    assert_equal "p", e.encrypt_message(message, shifted_array)
   end
+
+
 end
