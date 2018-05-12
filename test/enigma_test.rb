@@ -39,20 +39,37 @@ class EnigmaTest < Minitest::Test
     assert_equal [15, 28, 36, 49], e.generate_shift_array
   end
 
-  def test_encrypts_single_char
-    skip
+  def test_finds_single_char_index_in_char_map
     e = Enigma.new("12345")
     shifted_array = [14, 4]
     message = "b"
-    assert_equal "p", e.encrypt_message(message, shifted_array)
+
+    actual = e.find_message_in_char_map(message, shifted_array)
+    assert_equal [1], actual
+    refute_equal [2], actual
   end
 
-  def test_encrypts_two_char
+  def test_finds_two_char_index_in_char_map
     e = Enigma.new("12345")
     shifted_array = [14, 4]
     message = "af"
-    assert_equal "of", e.encrypt_message(message, shifted_array)
+
+    actual = e.find_message_in_char_map(message, shifted_array)
+    assert_equal [0, 5], actual
+    refute_equal [3, 8], actual
   end
 
+  def test_shifts_message_index
+    e = Enigma.new("12345")
+    shifted_array = [14, 4]
+    message = "af"
+
+    assert_equal [14, 9], e.shift_message_index([0, 5], [14, 4])
+  end
+
+  def test_assigns_new_letter_based_on_char_map_index
+    e = Enigma.new("12345")
+
+  end
 
 end
