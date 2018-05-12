@@ -30,11 +30,13 @@ class EnigmaTest < Minitest::Test
 
   def test_generate_offset
     e = Enigma.new
-    time = Time.now.strftime("%m%d%y")
-    offset = (time.to_i ** 2).to_s.split(//).last(4).join
-    expected = offset.each_char.map(&:to_i)
-    assert_equal expected, e.time_used_for_offset
     assert_equal 4, e.time_used_for_offset.length
     assert_equal Array, e.time_used_for_offset.class
+  end
+
+  def test_generate_shift_array
+    e = Enigma.new("12345")
+    e.rotater("12345")
+    assert_equal [15, 28, 36, 49], e.generate_shift_array
   end
 end

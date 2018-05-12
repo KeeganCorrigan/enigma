@@ -4,9 +4,11 @@ class Enigma
 
   attr_reader :key
               :message_to_encrypt
+              :rotated_array
 
   def initialize(message_to_encrypt = "", key = generate_key)
     @key = nil
+    @rotated_array = []
   end
 
   def generate_key
@@ -20,15 +22,14 @@ class Enigma
   end
 
   def rotater(key)
-    rotated_array = []
     x = -1
     4.times do
       x += 1
-      rotated_array << (key[0 + x] + key[1 + x]).split('').map do |number|
+      @rotated_array << (key[0 + x] + key[1 + x]).split('').map do |number|
         number.to_i
       end
     end
-    rotated_array
+    return @rotated_array
   end
 
   def time_used_for_offset
@@ -36,7 +37,22 @@ class Enigma
     offset = (time.to_i ** 2).to_s.split(//).last(4).join
     return offset.each_char.map(&:to_i)
   end
+
+  def generate_shift_array
+    shifted_array = []
+    x = -1
+    4.times do
+      binding.pry
+      x += 1
+      shifted_array << @rotated_array[x].flatten.join.to_i + time_used_for_offset[x]
+    end
+    return shifted_array
+  end
+
+  def 
 end
+
+
   # def rotate_b(key)
   #   (key[1] + key[2]).split('').map do |number|
   #     number.to_i
