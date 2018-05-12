@@ -16,6 +16,13 @@ class EnigmaTest < Minitest::Test
     assert_equal String, e.generate_key.class
   end
 
+  def test_generates_key_only_generates_one_key
+    e = Enigma.new
+    key_1 = e.generate_key
+    key_2 = e.generate_key
+    assert_equal(key_1, key_2)
+  end
+
   def test_enigma_accepts_input_key
     e = Enigma.new("12345")
     assert_equal 5, e.generate_key.length

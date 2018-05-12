@@ -1,9 +1,8 @@
 class Enigma
-
   attr_reader :key,
               :message_to_encrypt,
               :rotated_array,
-              :shifted_array
+              :shifted_array,
               :char_map
 
   def initialize(message_to_encrypt = "", key = generate_key)
@@ -15,13 +14,13 @@ class Enigma
   end
 
   def generate_key
-    if key == nil
-      key = ""
+    if @key == nil
+      @key = ""
       5.times do
-        key << rand(0..9).to_s
+        @key << rand(0..9).to_s
       end
     end
-    return key
+    return @key
   end
 
   def rotater(key)
