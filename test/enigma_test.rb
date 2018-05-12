@@ -39,4 +39,11 @@ class EnigmaTest < Minitest::Test
     e.rotater("12345")
     assert_equal [15, 28, 36, 49], e.generate_shift_array
   end
+
+  def test_finds_message_in_char_map
+    e = Enigma.new("12345")
+    shifted_array = [14, 4]
+    message = "a"
+    assert_equal "o", e.find_char(message, shifted_array)
+  end
 end
