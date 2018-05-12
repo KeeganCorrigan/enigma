@@ -1,5 +1,3 @@
-require 'pry'
-
 class Enigma
 
   attr_reader :key,
@@ -51,11 +49,15 @@ class Enigma
   end
 
   def encrypt_message(message, shifted_array)
+    complete = []
+    message_array = message.chars
     char_map = ('a'..'z').to_a + ('0'..'9').to_a
-    new_new = char_map.each_index.select do |index|
-      char_map[index] == message
+    message_array.each do |letter|
+      complete << char_map.each_index.select do |index|
+        char_map[index] == letter
+      end
     end
-    return char_map[new_new[0] + shifted_array[0]]
+    return complete
   end
 
 end
