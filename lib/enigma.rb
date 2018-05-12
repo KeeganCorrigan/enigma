@@ -73,6 +73,13 @@ class Enigma
     end
     return second_shifted_array
   end
-  
+
+  def encrypt(new_indexes)
+    encrypted = new_indexes.map do |index|
+      @char_map[index - 1]
+    end
+    encrypted.join
+  end
+
 
 end
