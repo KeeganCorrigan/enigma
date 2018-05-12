@@ -48,32 +48,4 @@ class Enigma
     end
     return shifted_array
   end
-
-  def 
 end
-
-
-  # def rotate_b(key)
-  #   (key[1] + key[2]).split('').map do |number|
-  #     number.to_i
-  #   end
-  # end
-  #
-  # def rotate_c(key)
-  #   (key[2] + key[3]).split('').map do |number|
-  #     number.to_i
-  #   end
-  # end
-  #
-  # def rotate_d(key)
-  #   (key[3] + key[4]).split('').map do |number|
-  #     number.to_i
-  #   end
-  # end
-
-  # def convert_rotate_key_to_integer_array
-
-
-  # def generate_shift_amount_for_a_rotation_and_offset
-  #   rotate_a(key) + time_used_for_offset
-  # end
