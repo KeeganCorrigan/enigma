@@ -14,19 +14,25 @@ class Enigma
   end
 
   def rotate_a(key)
-    key[0] + key[1]
+    # needs refactoring. It should do this all at once.
+    (key[0] + key[1]).split('').map do |number|
+      number.to_i
+    end
   end
 
   def rotate_b(key)
-    key[1] + key[2]
+    key[1] + key[2].split('').map do |number|
+      number.to_i
   end
 
   def rotate_c(key)
-    key[2] + key[3]
+    key[2] + key[3].split('').map do |number|
+      number.to_i
   end
 
   def rotate_d(key)
-    key[3] + key[4]
+    key[3] + key[4].split('').map do |number|
+      number.to_i
   end
 
   def time_used_for_offset
@@ -35,7 +41,7 @@ class Enigma
     return offset.each_char.map(&:to_i)
   end
 
-  def generate_shift_amount_for_a_rotation_and_offset(rotate_a), time_used_for_offset)
-
-  end
+  # def generate_shift_amount_for_a_rotation_and_offset
+  #   rotate_a(key) + time_used_for_offset
+  # end
 end
