@@ -7,4 +7,9 @@ class Enigma
     encryptor.encrypt
   end
 
+  def decrypt(my_message, key = nil, date = nil)
+    encryptor = Encryptor.new(my_message, key, date)
+    encryptor.decrypt
+  end
+
 end

@@ -23,12 +23,12 @@ class Encryptor
     return encrypted_message
   end
 
-  # def decrypt
-  #   cipher = OffSetCalculator.new.create_cipher(key, time)
-  #   message_index = find_message_in_char_map(message)
-  #   decrypted_message = reverse_rotater(message_index, cipher)
-  #   return decrypted_message
-  # end
+  def decrypt
+    cipher = OffSetCalculator.new.create_cipher(key, time)
+    message_index = find_message_in_char_map(message)
+    decrypted_message = reverse_rotater(message_index, cipher)
+    return decrypted_message
+  end
 
   def find_message_in_char_map(message)
     message_index = []
