@@ -13,7 +13,7 @@ class Enigma
     encryptor.decrypt
   end
 
-  def crack(encrypted_message)
+  def crack(encrypted_message, date)
     operator = :+
     cracked_key = Crack.new(encrypted_message).cracker(encrypted_message)
     encryptor = Encryptor.new(encrypted_message)
