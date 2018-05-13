@@ -1,63 +1,53 @@
+require_relative 'key.rb'
+require_relative 'OffSetCalculator.rb'
+require 'date'
+
 class Enigma
+  attr_reader   :key,
+                :char_map,
+                :message_index,
+                :message,
+                :time
 
-  attr_reader :key,
-              :message_to_encrypt,
-              :rotated_array,
-              :shifted_array
-
-  def initialize(message_to_encrypt = "", key = generate_key)
-    @key = nil
-    @rotated_array = []
-    @shifted_array = []
+  def initialize(message, key = nil, time = nil)
+    @time = time || Date.today
+    @key = key || Key.new.generate_key
+    @char_map = (('a'..'z').to_a + ('0'..'9').to_a).push(' ', '.', ',')
+    @message = message
   end
 
-  def generate_key
-    if key == nil
-      key = ""
-      5.times do
-        key << rand(0..9).to_s
-      end
-    end
-    return key
+  def encrypt
+    cipher = OffSetCalculator.new.cipher(key, time)
+    message_index = find_message_in_char_map(message)
+    encrypted_message = rotater(message_index, cipher)
+    return encrypted_message
   end
 
-  def rotater(key)
-    x = -1
-    4.times do
-      x += 1
-      @rotated_array << (key[0 + x] + key[1 + x]).split('').map do |number|
-        number.to_i
-      end
-    end
-    return @rotated_array
-  end
-
-  def time_used_for_offset
-    time = Time.now.strftime("%m%d%y")
-    offset = (time.to_i ** 2).to_s.split(//).last(4).join
-    return offset.each_char.map(&:to_i)
-  end
-
-  def generate_shift_array
-    shifted_array = []
-    x = -1
-    4.times do
-      x += 1
-      shifted_array << @rotated_array[x].flatten.join.to_i + time_used_for_offset[x]
-    end
-    return shifted_array
-  end
-
-  def encrypt_message(message, shifted_array)
-    complete = []
+  def find_message_in_char_map(message)
+    message_index = []
     message_array = message.chars
-    char_map = ('a'..'z').to_a + ('0'..'9').to_a
     message_array.each do |letter|
-      complete << char_map.each_index.select do |index|
-        char_map[index] == letter
+      message_index << @char_map.each_index.select do |index|
+        @char_map[index] == letter
       end
     end
-    return complete
+    return message_index.flatten
   end
 
+  def rotater(message_index, cipher)
+    encrypted_message = []
+    x = 0
+    message_index.map do |number|
+      if x > 3
+        x = 0
+      end
+      encrypted_message << @char_map[(number + cipher[x]) % 39]
+      x += 1
+    end
+    return encrypted_message.join
+  end
 end
+  #
+  # def rotater(shift_index_amount)
+  #   shift_index_amount.map { |index| @char_map[(index % @char_map.length)] }.join
+  # end

@@ -1,59 +1,77 @@
 require 'pry'
 gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'test_helper'
 require './lib/enigma.rb'
 
 class EnigmaTest < Minitest::Test
-
   def test_it_exists
-    e = Enigma.new
+    e = Enigma.new("hello", "12345", Date.new(2018, 5, 12))
     assert_instance_of(Enigma, e)
   end
 
-  def test_generates_key
-    e = Enigma.new
-    assert_equal 5, e.generate_key.length
-    assert_equal String, e.generate_key.class
-  end
-
   def test_enigma_accepts_input_key
-    e = Enigma.new("12345")
-    assert_equal 5, e.generate_key.length
-    assert_equal String, e.generate_key.class
+    e = Enigma.new("hello", "12345", Date.new(2018, 5, 12))
+    assert_equal 5, e.key.length
+    assert_equal String, e.key.class
+    assert_equal "12345", e.key
   end
 
-  def test_rotate_works_on_a_key
-    e = Enigma.new
-    assert_equal [[1,2],[2,3],[3, 4], [4, 5]], e.rotater("12345")
+  def test_char_map
+    e = Enigma.new("theend", "12345", Date.new(2018, 5, 12))
+    assert_equal false, e.char_map.include?('!')
+    assert_equal true, e.char_map.include?('8')
+    assert_equal false, e.char_map.include?('arp')
+    assert_equal 39, e.char_map.length
   end
 
-  def test_generate_offset
-    e = Enigma.new
-    assert_equal 4, e.time_used_for_offset.length
-    assert_equal Array, e.time_used_for_offset.class
+  def test_enigma_generates_key_if_no_user_input
+    e = Enigma.new("theend", "12345", Date.new(2018, 5, 12))
+    assert_equal 5, e.key.length
+    assert_equal String, e.key.class
   end
 
-  def test_generate_shift_array
-    e = Enigma.new("12345")
-    e.rotater("12345")
-    assert_equal [15, 28, 36, 49], e.generate_shift_array
+  def test_find_message_in_char_map
+    e = Enigma.new("abcdef")
+    assert_equal [0,1,2,3,4,5], e.find_message_in_char_map(e.message)
   end
 
-  def test_encrypts_single_char
-    skip
-    e = Enigma.new("12345")
-    shifted_array = [14, 4]
-    message = "b"
-    assert_equal "p", e.encrypt_message(message, shifted_array)
+  def test_message_index_is_correct
+    e = Enigma.new("hello", "12345", Date.new(2018, 5, 12))
+    assert_equal [7, 4, 11, 11, 14], e.find_message_in_char_map(e.message)
+    refute_equal [6, 14, 24, 78, 101], e.find_message_in_char_map(e.message)
   end
 
-  def test_encrypts_two_char
-    e = Enigma.new("12345")
-    shifted_array = [14, 4]
-    message = "af"
-    assert_equal "of", e.encrypt_message(message, shifted_array)
+  def test_rotater
+    e = Enigma.new("hello", "12345", Date.new(2018, 5, 12))
+    message_index = [7, 4, 11, 11, 14]
+    cipher = [20, 26, 36, 49]
+    assert_equal "14iv8", e.rotater(message_index, cipher)
   end
-
-
 end
+
+
+  # def test_rotater_returns_encrypted_message
+  #   e = Enigma.new("yarr", "12345", Date.new(2018, 5, 12))
+  #
+  #   expected_message = "cat"
+  #   shift_index_amount = [0,0,0,0]
+  #   assert_equal expected_message, e.rotater(shift_index_amount)
+  # end
+
+  #
+  # def test_shifts_message_index
+  #   skip
+  #   e = Enigma.new("theend", "12345")
+  #   shifted_array = [14, 4]
+  #   message = "af"
+  #
+  #   assert_equal [14, 9], e.shift_message_index([0, 5], [14, 4])
+  # end
+  #
+  # def test_assigns_new_letter_based_on_char_map_index
+  #   skip
+  #   e = Enigma.new("theend", "12345")
+  #   message_char_map_indexes = [14, 9]
+  #
+  #   assert_equal "ni", e.encrypt(message_char_map_indexes)
+  # end
