@@ -24,4 +24,17 @@ class CrackTest < Minitest::Test
     assert_instance_of Date, crack.time
   end
 
+  def test_cracks_one_letter
+    skip
+    encrypted_message = "h"
+    crack = Crack.new(encrypted_message, Date.new(2018, 5, 12))
+    assert_equal 30, crack.cracker(encrypted_message)
+  end
+
+  def test_cracks_two_letters
+    encrypted_message = "14iv8iyaais"
+    crack = Crack.new(encrypted_message, Date.new(2018, 5, 12))
+    assert_equal "nd..", crack.cracker(encrypted_message)
+  end
+
 end

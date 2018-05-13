@@ -1,6 +1,6 @@
 require_relative 'key.rb'
 require_relative 'offsetcalculator.rb'
-require 'date'
+require 'Date'
 
 class Encryptor
   attr_reader   :key,
