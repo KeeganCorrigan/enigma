@@ -34,8 +34,7 @@ class Encryptor
 
   def find_message_in_char_map(message)
     message_index = []
-    message_array = message.chars
-    message_array.each do |letter|
+    message.chars.each do |letter|
       message_index << @char_map.each_index.select do |index|
         @char_map[index] == letter
       end
@@ -55,5 +54,5 @@ class Encryptor
     end
     return encrypted_message.join
   end
-  
+
 end
