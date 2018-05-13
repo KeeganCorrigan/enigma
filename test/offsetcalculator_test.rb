@@ -13,14 +13,15 @@ class OffSetCalculatorTest < Minitest::Test
   def test_generate_offset
     e = Encryptor.new("yarr", "12345", Date.new(2018, 5, 12))
     o = OffSetCalculator.new
-    assert_equal 4, o.time_used_for_offset(Date.new(2018, 5, 12)).length
-    assert_equal Array, o.time_used_for_offset(Date.new(2018, 5, 12)).class
+    assert_equal 4, o.cipher_offset_time(Date.new(2018, 5, 12)).length
+    assert_equal Array, o.cipher_offset_time(Date.new(2018, 5, 12)).class
+    assert_equal [8, 3, 2, 4], o.cipher_offset_time(Date.new(2018, 5, 12))
   end
 
   def test_cipher
     e = Encryptor.new("yarr", "12345", Date.new(2018, 5, 12))
     o = OffSetCalculator.new
-    assert_equal [15, 28, 36, 49], o.cipher(e.key, Date.new(2018, 5, 12))
+    assert_equal [20, 26, 36, 49], o.create_cipher(e.key, Date.new(2018, 5, 12))
   end
 
 end
