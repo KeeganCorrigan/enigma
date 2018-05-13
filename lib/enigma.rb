@@ -1,17 +1,15 @@
 class Enigma
   attr_reader :key,
               :message_to_encrypt,
-              :rotated_array,
-              :shifted_array,
               :char_map
 
   def initialize(message_to_encrypt = "", key = "")
-    @key = key
-    @rotated_array = []
-    @shifted_array = []
+    @key = key || Key.new.generate_key
     @char_map = ('a'..'z').to_a + ('0'..'9').to_a
     @message_index = []
   end
+
+  
 
   # def generate_key
   #   if @key == ""

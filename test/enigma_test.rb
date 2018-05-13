@@ -29,24 +29,24 @@ class EnigmaTest < Minitest::Test
     assert_equal String, e.generate_key.class
   end
 
-  def test_generate_offset
-    e = Enigma.new
-    assert_equal 4, e.time_used_for_offset.length
-    assert_equal Array, e.time_used_for_offset.class
-  end
-
-  def test_generate_shift_array
-    e = Enigma.new("12345")
-    e.rotater("12345")
-    assert_equal [15, 28, 36, 49], e.generate_shift_array
-  end
+  # def test_generate_offset
+  #   e = Enigma.new
+  #   assert_equal 4, e.time_used_for_offset.length
+  #   assert_equal Array, e.time_used_for_offset.class
+  # end
+  # 
+  # def test_generate_shift_array
+  #   e = Enigma.new("12345")
+  #   e.rotater("12345")
+  #   assert_equal [15, 28, 36, 49], e.generate_shift_array
+  # end
 
   def test_finds_single_char_index_in_char_map
     e = Enigma.new("12345")
     shifted_array = [14, 4]
     message = "b"
 
-    actual = e.find_message_in_char_map(message, shifted_array)
+    actual = e.find_message_in_char_map(message, cipher)
     assert_equal [1], actual
     refute_equal [2], actual
   end
@@ -56,7 +56,7 @@ class EnigmaTest < Minitest::Test
     shifted_array = [14, 4]
     message = "af"
 
-    actual = e.find_message_in_char_map(message, shifted_array)
+    actual = e.find_message_in_char_map(message, cipher)
     assert_equal [0, 5], actual
     refute_equal [3, 8], actual
   end

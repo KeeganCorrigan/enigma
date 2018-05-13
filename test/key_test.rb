@@ -13,7 +13,7 @@ class KeyTest < Minitest::Test
   def test_generates_key
     k = Key.new
     k.generate_key
-    assert_equal 5, k.key.length
-    assert_equal String, k.key.class
+    assert_equal 5, k.generate_key.length
+    assert_equal String, k.generate_key.class
   end
 end
