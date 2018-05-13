@@ -23,6 +23,13 @@ class Encryptor
     return encrypted_message
   end
 
+  # def decrypt
+  #   cipher = OffSetCalculator.new.create_cipher(key, time)
+  #   message_index = find_message_in_char_map(message)
+  #   decrypted_message = reverse_rotater(message_index, cipher)
+  #   return decrypted_message
+  # end
+
   def find_message_in_char_map(message)
     message_index = []
     message_array = message.chars
@@ -42,6 +49,19 @@ class Encryptor
         x = 0
       end
       encrypted_message << @char_map[(number + cipher[x]) % 39]
+      x += 1
+    end
+    return encrypted_message.join
+  end
+
+  def reverse_rotater(message_index, cipher)
+    encrypted_message = []
+    x = 0
+    message_index.map do |number|
+      if x > 3
+        x = 0
+      end
+      encrypted_message << @char_map[(number - cipher[x]) % 39]
       x += 1
     end
     return encrypted_message.join
