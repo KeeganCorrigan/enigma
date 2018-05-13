@@ -1,4 +1,4 @@
-require_relative 'enigma.rb'
+require_relative 'encryptor.rb'
 
 class Key
   def generate_key
