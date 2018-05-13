@@ -34,12 +34,19 @@ class EnigmaTest < Minitest::Test
     assert_equal [0,1,2,3,4,5], e.find_message_in_char_map(e.message)
   end
 
-  def test_rotater_returns_encrypted_message
-    e = Enigma.new("yarr", "12345", , Date.new(2018, 5, 12))
-    expected_message = "cat"
-    shift_index_amount = [0,0,0,0]
-    assert_equal expected_message, e.rotater(shift_index_amount)
+  def test_cipher
+    e = Enigma.new("theend", "12345", Date.new(2018, 5, 12))
+    e.encrypt
   end
+
+
+  # def test_rotater_returns_encrypted_message
+  #   e = Enigma.new("yarr", "12345", Date.new(2018, 5, 12))
+  #
+  #   expected_message = "cat"
+  #   shift_index_amount = [0,0,0,0]
+  #   assert_equal expected_message, e.rotater(shift_index_amount)
+  # end
 end
 
   #

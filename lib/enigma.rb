@@ -20,7 +20,10 @@ class Enigma
     cipher = OffSetCalculator.new.cipher(key, time)
     message_index = find_message_in_char_map(message)
     shift_index_amount = shift_message_index(message_index, cipher)
-    rotater(shift_index_amount)
+    binding.pry
+    encrypted_message = rotater(shift_index_amount)
+    binding.pry
+    return encrypted_message
   end
 
   def find_message_in_char_map(message)
@@ -41,13 +44,15 @@ class Enigma
       if x > 3
         x = 0
       end
-      second_shifted_array << (number + shifted_array[x])
+      shift_index_amount << (number + shifted_array[x])
       x += 1
     end
     return shift_index_amount
   end
-
+  #this is returning the correct amount, but it needs to restart at the beginning of the char map when it reaches the end.
   def rotater(shift_index_amount)
-    shift_index_amount.map { |index| @char_map[index - 1]}.join
+    new_array = []
+    shift_index_amount.map { |index| @char_map[index - 1] }.join
+    end
   end
 end

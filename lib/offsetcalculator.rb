@@ -1,12 +1,6 @@
 require_relative 'enigma.rb'
 
 class OffSetCalculator
-  attr_reader :cipher_array
-
-  def initialize
-    @cipher_array = []
-  end
-
   def rotater(key)
     rotated_array = []
     x = -1
@@ -25,13 +19,13 @@ class OffSetCalculator
     return offset.each_char.map(&:to_i)
   end
 
-  def cipher(key, time) # adding rotated array values to offset values
-    @cipher_array = []
+  def cipher(key, time)
+    cipher_array = []
     x = -1
     4.times do
       x += 1
-      @cipher_array << rotater(key)[x].flatten.join.to_i + time_used_for_offset(time)[x]
+      cipher_array << rotater(key)[x].flatten.join.to_i + time_used_for_offset(time)[x]
     end
-    return @cipher_array
+    return cipher_array
   end
 end

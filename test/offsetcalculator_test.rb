@@ -13,14 +13,14 @@ class OffSetCalculatorTest < Minitest::Test
   def test_generate_offset
     e = Enigma.new("yarr", "12345", Date.new(2018, 5, 12))
     o = OffSetCalculator.new
-    assert_equal 4, o.time_used_for_offset.length
-    assert_equal Array, o.time_used_for_offset.class
+    assert_equal 4, o.time_used_for_offset(Date.new(2018, 5, 12)).length
+    assert_equal Array, o.time_used_for_offset(Date.new(2018, 5, 12)).class
   end
 
   def test_cipher
     e = Enigma.new("yarr", "12345", Date.new(2018, 5, 12))
     o = OffSetCalculator.new
-    assert_equal [15, 28, 36, 49], o.cipher(e.key)
+    assert_equal [15, 28, 36, 49], o.cipher(e.key, Date.new(2018, 5, 12))
   end
 
 end
