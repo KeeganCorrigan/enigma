@@ -3,7 +3,7 @@ require_relative 'enigma.rb'
 class OffSetCalculator
   attr_reader :cipher_array
 
-  def initialize(key)
+  def initialize
     @cipher_array = []
   end
 

@@ -6,7 +6,6 @@ class Key
     5.times do
       key << rand(0..9).to_s
     end
-    binding.pry
     return key
   end
 end
