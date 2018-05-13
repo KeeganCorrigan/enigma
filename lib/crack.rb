@@ -1,4 +1,5 @@
 # require_relative 'encryptor.rb'
+require 'date'
 
 class Crack
   attr_reader     :encrypted_message,
