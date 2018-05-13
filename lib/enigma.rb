@@ -1,4 +1,5 @@
 require_relative 'encryptor.rb'
+require_relative 'crack.rb'
 
 class Enigma
 
@@ -12,13 +13,13 @@ class Enigma
     encryptor.decrypt
   end
 
-  def crack(encrypted_message, cipher)
-    operator = :-
-    cracked_key = Crack.new.cracker(encrypted_message)
+  def crack(encrypted_message)
+    operator = :+
+    cracked_key = Crack.new(encrypted_message).cracker(encrypted_message)
     encryptor = Encryptor.new(encrypted_message)
     reversed = encrypted_message.reverse
     reversed_message_index_array = encryptor.find_message_in_char_map(reversed)
-    decrypted_message = rotater(reversed_message_index_array, cracked_key, operator)
+    decrypted_message = encryptor.rotater(reversed_message_index_array, cracked_key.reverse, operator)
     return decrypted_message.reverse
   end
 

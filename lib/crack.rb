@@ -1,4 +1,5 @@
 require_relative 'encryptor.rb'
+require_relative 'enigma.rb'
 require 'Date'
 
 class Crack
