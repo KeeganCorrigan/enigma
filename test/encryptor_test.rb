@@ -21,9 +21,15 @@ class EncryptorTest < Minitest::Test
     assert_equal "hello", e.message
   end
 
-  def test_encryptor_creates_key
+  def test_encryptor_creates_key_if_none_enetered
     e = Encryptor.new("hello", Date.new(2018, 5, 12))
-    assert_nil e.key
+    refute e.key == nil
+  end
+
+  def test_encryptor_creates_key_if_none_enetered
+    e = Encryptor.new("hello", "12345")
+    refute e.time == nil
+    assert_equal Date.today, e.time
   end
 
   def test_char_map
@@ -58,30 +64,3 @@ class EncryptorTest < Minitest::Test
     assert_equal "14iv8", e.rotater(message_index, cipher)
   end
 end
-
-
-  # def test_rotater_returns_encrypted_message
-  #   e = Enigma.new("yarr", "12345", Date.new(2018, 5, 12))
-  #
-  #   expected_message = "cat"
-  #   shift_index_amount = [0,0,0,0]
-  #   assert_equal expected_message, e.rotater(shift_index_amount)
-  # end
-
-  #
-  # def test_shifts_message_index
-  #   skip
-  #   e = Enigma.new("theend", "12345")
-  #   shifted_array = [14, 4]
-  #   message = "af"
-  #
-  #   assert_equal [14, 9], e.shift_message_index([0, 5], [14, 4])
-  # end
-  #
-  # def test_assigns_new_letter_based_on_char_map_index
-  #   skip
-  #   e = Enigma.new("theend", "12345")
-  #   message_char_map_indexes = [14, 9]
-  #
-  #   assert_equal "ni", e.encrypt(message_char_map_indexes)
-  # end

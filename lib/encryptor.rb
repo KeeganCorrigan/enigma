@@ -1,5 +1,5 @@
 require_relative 'key.rb'
-require_relative 'OffSetCalculator.rb'
+require_relative 'offsetcalculator.rb'
 require 'date'
 
 class Encryptor
@@ -17,7 +17,7 @@ class Encryptor
   end
 
   def encrypt
-    cipher = OffSetCalculator.new.cipher(key, time)
+    cipher = OffSetCalculator.new.create_cipher(key, time)
     message_index = find_message_in_char_map(message)
     encrypted_message = rotater(message_index, cipher)
     return encrypted_message
