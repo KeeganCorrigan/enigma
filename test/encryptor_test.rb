@@ -61,13 +61,16 @@ class EncryptorTest < Minitest::Test
     e = Encryptor.new("hello", "12345", Date.new(2018, 5, 12))
     message_index = [7, 4, 11, 11, 14]
     cipher = [20, 26, 36, 49]
-    assert_equal "14iv8", e.rotater(message_index, cipher)
+    operator = :+
+    assert_equal "14iv8", e.rotater(message_index, cipher, operator)
   end
 
   def test_reverse_rotator
     e = Encryptor.new("14iv8", "12345", Date.new(2018, 5, 12))
     message_index = [27, 30, 8, 21, 34]
     cipher = [20, 26, 36, 49]
-    assert_equal "hello", e.reverse_rotater(message_index, cipher)
+    operator = :-
+    assert_equal "hello", e.rotater(message_index, cipher, operator)
   end
+
 end

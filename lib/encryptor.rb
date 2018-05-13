@@ -17,16 +17,18 @@ class Encryptor
   end
 
   def encrypt
+    operator = :+
     cipher = OffSetCalculator.new.create_cipher(key, time)
     message_index = find_message_in_char_map(message)
-    encrypted_message = rotater(message_index, cipher)
+    encrypted_message = rotater(message_index, cipher, operator)
     return encrypted_message
   end
 
   def decrypt
+    operator = :-
     cipher = OffSetCalculator.new.create_cipher(key, time)
     message_index = find_message_in_char_map(message)
-    decrypted_message = reverse_rotater(message_index, cipher)
+    decrypted_message = rotater(message_index, cipher, operator)
     return decrypted_message
   end
 
@@ -41,29 +43,17 @@ class Encryptor
     return message_index.flatten
   end
 
-  def rotater(message_index, cipher)
+  def rotater(message_index, cipher, operator)
     encrypted_message = []
     x = 0
     message_index.map do |number|
       if x > 3
         x = 0
       end
-      encrypted_message << @char_map[(number + cipher[x]) % 39]
+      encrypted_message << @char_map[(number.public_send(operator, cipher[x])) % 39]
       x += 1
     end
     return encrypted_message.join
   end
-
-  def reverse_rotater(message_index, cipher)
-    encrypted_message = []
-    x = 0
-    message_index.map do |number|
-      if x > 3
-        x = 0
-      end
-      encrypted_message << @char_map[(number - cipher[x]) % 39]
-      x += 1
-    end
-    return encrypted_message.join
-  end
+  
 end
