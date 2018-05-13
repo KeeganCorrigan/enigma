@@ -23,44 +23,25 @@ class EnigmaTest < Minitest::Test
     assert_equal false, e.char_map.include?('arp')
   end
 
-  def test_message_index_is_empty
-    e = Enigma.new("theend", "12345")
-    assert_equal true, e.message_index.empty?
-  end
-
   def test_enigma_generates_key_if_no_user_input
     e = Enigma.new("theend")
     assert_equal 5, e.key.length
     assert_equal String, e.key.class
   end
 
+  def test_find_message_in_char_map
+    e = Enigma.new("abcdef")
+    assert_equal [0,1,2,3,4,5], e.find_message_in_char_map(e.message)
+  end
 
-  def test_encrypt_returns_encrypted_message
-    e = Enigma.new("yarr", "12345")
+  def test_rotater_returns_encrypted_message
+    e = Enigma.new("yarr", "12345", , Date.new(2018, 5, 12))
     expected_message = "cat"
-    assert_equal expected_message, e.encrypt
+    shift_index_amount = [0,0,0,0]
+    assert_equal expected_message, e.rotater(shift_index_amount)
   end
 end
-  # def test_finds_single_char_index_in_char_map
-  #   skip
-  #   e = Enigma.new("b", "12345")
-  #   cipher = [14, 4]
-  #
-  #   actual = e.find_message_in_char_map(message, cipher)
-  #   assert_equal [1], actual
-  #   refute_equal [2], actual
-  # end
-  #
-  # def test_finds_two_char_index_in_char_map
-  #   skip
-  #   e = Enigma.new("theend", "12345")
-  #   shifted_array = [14, 4]
-  #   message = "af"
-  #
-  #   actual = e.find_message_in_char_map(message, cipher)
-  #   assert_equal [0, 5], actual
-  #   refute_equal [3, 8], actual
-  # end
+
   #
   # def test_shifts_message_index
   #   skip
