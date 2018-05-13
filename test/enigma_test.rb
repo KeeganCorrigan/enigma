@@ -52,4 +52,12 @@ class EnigmaTest < Minitest::Test
     assert_equal "this is so secret ..end..", expected
   end
 
+  def test_crack_generates_cracked_key
+    skip
+    e = Enigma.new
+    encrypted_message = "14iv8x8iyaais"
+    actual = e.crack(encrypted_message)
+    assert_instance_of Array, actual
+  end
+
 end
