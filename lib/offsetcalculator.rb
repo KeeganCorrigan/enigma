@@ -14,7 +14,7 @@ class OffSetCalculator
   end
 
   def time_used_for_offset(time)
-    time = time.strftime("%m%d%y")
+    time = time.strftime("%d%m%y")
     offset = (time.to_i ** 2).to_s.split(//).last(4).join
     return offset.each_char.map(&:to_i)
   end

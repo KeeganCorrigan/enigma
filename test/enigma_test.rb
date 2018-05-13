@@ -5,19 +5,19 @@ require './lib/enigma.rb'
 
 class EnigmaTest < Minitest::Test
   def test_it_exists
-    e = Enigma.new("theend")
+    e = Enigma.new("hello", "12345", Date.new(2018, 5, 12))
     assert_instance_of(Enigma, e)
   end
 
   def test_enigma_accepts_input_key
-    e = Enigma.new("theend", "12345")
+    e = Enigma.new("hello", "12345", Date.new(2018, 5, 12))
     assert_equal 5, e.key.length
     assert_equal String, e.key.class
     assert_equal "12345", e.key
   end
 
   def test_char_map
-    e = Enigma.new("theend", "12345")
+    e = Enigma.new("theend", "12345", Date.new(2018, 5, 12))
     assert_equal false, e.char_map.include?('!')
     assert_equal true, e.char_map.include?('8')
     assert_equal false, e.char_map.include?('arp')
@@ -25,7 +25,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_enigma_generates_key_if_no_user_input
-    e = Enigma.new("theend")
+    e = Enigma.new("theend", "12345", Date.new(2018, 5, 12))
     assert_equal 5, e.key.length
     assert_equal String, e.key.class
   end
@@ -35,9 +35,17 @@ class EnigmaTest < Minitest::Test
     assert_equal [0,1,2,3,4,5], e.find_message_in_char_map(e.message)
   end
 
-  def test_cipher
-    e = Enigma.new("theend", "12345", Date.new(2018, 5, 12))
-    e.encrypt
+  def test_message_index_is_correct
+    e = Enigma.new("hello", "12345", Date.new(2018, 5, 12))
+    assert_equal [7, 4, 11, 11, 14], e.find_message_in_char_map(e.message)
+    refute_equal [6, 14, 24, 78, 101], e.find_message_in_char_map(e.message)
+  end
+
+  def test_rotater
+    e = Enigma.new("hello", "12345", Date.new(2018, 5, 12))
+    message_index = [7, 4, 11, 11, 14]
+    cipher = [20, 26, 36, 49]
+    assert_equal "14iv8", e.rotater(message_index, cipher)
   end
 end
 

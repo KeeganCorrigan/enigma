@@ -19,8 +19,7 @@ class Enigma
   def encrypt
     cipher = OffSetCalculator.new.cipher(key, time)
     message_index = find_message_in_char_map(message)
-    shift_index_amount = shift_message_index(message_index, cipher)
-    encrypted_message = rotater(shift_index_amount)
+    encrypted_message = rotater(message_index, cipher)
     return encrypted_message
   end
 
@@ -35,20 +34,20 @@ class Enigma
     return message_index.flatten
   end
 
-  def shift_message_index(message_index, shifted_array)
-    shift_index_amount = []
+  def rotater(message_index, cipher)
+    encrypted_message = []
     x = 0
     message_index.map do |number|
       if x > 3
         x = 0
       end
-      shift_index_amount << (number + shifted_array[x])
+      encrypted_message << @char_map[(number + cipher[x]) % 39]
       x += 1
     end
-    return shift_index_amount
-  end
-
-  def rotater(shift_index_amount)
-    shift_index_amount.map { |index| @char_map[(index % @char_map.length)] }.join
+    return encrypted_message.join
   end
 end
+  #
+  # def rotater(shift_index_amount)
+  #   shift_index_amount.map { |index| @char_map[(index % @char_map.length)] }.join
+  # end
