@@ -12,7 +12,7 @@ class Enigma
   def initialize(message, key = nil, time = nil)
     @time = time || Date.today
     @key = key || Key.new.generate_key
-    @char_map = ('a'..'z').to_a + ('0'..'9').to_a
+    @char_map = (('a'..'z').to_a + ('0'..'9').to_a).push(' ', '.', ',')
     @message = message
   end
 
@@ -20,9 +20,7 @@ class Enigma
     cipher = OffSetCalculator.new.cipher(key, time)
     message_index = find_message_in_char_map(message)
     shift_index_amount = shift_message_index(message_index, cipher)
-    binding.pry
     encrypted_message = rotater(shift_index_amount)
-    binding.pry
     return encrypted_message
   end
 
@@ -49,10 +47,8 @@ class Enigma
     end
     return shift_index_amount
   end
-  #this is returning the correct amount, but it needs to restart at the beginning of the char map when it reaches the end.
+
   def rotater(shift_index_amount)
-    new_array = []
-    shift_index_amount.map { |index| @char_map[index - 1] }.join
-    end
+    shift_index_amount.map { |index| @char_map[(index % @char_map.length)] }.join
   end
 end

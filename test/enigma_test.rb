@@ -16,11 +16,12 @@ class EnigmaTest < Minitest::Test
     assert_equal "12345", e.key
   end
 
-  def test_char_map_contains_alphabet
+  def test_char_map
     e = Enigma.new("theend", "12345")
     assert_equal false, e.char_map.include?('!')
     assert_equal true, e.char_map.include?('8')
     assert_equal false, e.char_map.include?('arp')
+    assert_equal 39, e.char_map.length
   end
 
   def test_enigma_generates_key_if_no_user_input
@@ -38,6 +39,7 @@ class EnigmaTest < Minitest::Test
     e = Enigma.new("theend", "12345", Date.new(2018, 5, 12))
     e.encrypt
   end
+end
 
 
   # def test_rotater_returns_encrypted_message
@@ -47,7 +49,6 @@ class EnigmaTest < Minitest::Test
   #   shift_index_amount = [0,0,0,0]
   #   assert_equal expected_message, e.rotater(shift_index_amount)
   # end
-end
 
   #
   # def test_shifts_message_index
