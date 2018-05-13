@@ -13,18 +13,18 @@ class OffSetCalculator
     return rotated_array
   end
 
-  def time_used_for_offset(time)
+  def cipher_offset_time(time)
     time = time.strftime("%d%m%y")
     offset = (time.to_i ** 2).to_s.split(//).last(4).join
     return offset.each_char.map(&:to_i)
   end
 
-  def cipher(key, time)
+  def create_cipher(key, time)
     cipher_array = []
     x = -1
     4.times do
       x += 1
-      cipher_array << rotater(key)[x].flatten.join.to_i + time_used_for_offset(time)[x]
+      cipher_array << rotater(key)[x].flatten.join.to_i + cipher_offset_time(time)[x]
     end
     return cipher_array
   end

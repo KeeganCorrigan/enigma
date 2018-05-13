@@ -16,6 +16,16 @@ class EncryptorTest < Minitest::Test
     assert_equal "12345", e.key
   end
 
+  def test_encryptor_accepts_message
+    e = Encryptor.new("hello", "12345", Date.new(2018, 5, 12))
+    assert_equal "hello", e.message
+  end
+
+  def test_encryptor_creates_key
+    e = Encryptor.new("hello", Date.new(2018, 5, 12))
+    assert_nil e.key
+  end
+
   def test_char_map
     e = Encryptor.new("theend", "12345", Date.new(2018, 5, 12))
     assert_equal false, e.char_map.include?('!')
