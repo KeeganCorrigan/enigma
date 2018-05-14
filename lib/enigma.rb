@@ -2,15 +2,28 @@ require_relative 'encryptor.rb'
 require_relative 'crack.rb'
 
 class Enigma
+  attr_reader :key,
+              :date
+
+  def initialize(key = nil, date = nil)
+    @key = key
+    @date = date
+  end
 
   def encrypt(my_message, key = nil, date = nil)
     encryptor = Encryptor.new(my_message, key, date)
-    encryptor.encrypt
+    output = encryptor.encrypt
+    @key = encryptor.key
+    @date = encryptor.time
+    output
   end
 
-  def decrypt(my_message, key = nil, date = nil)
+  def decrypt(my_message, key, date)
     encryptor = Encryptor.new(my_message, key, date)
-    encryptor.decrypt
+    output = encryptor.decrypt
+    @key = encryptor.key
+    @date = encryptor.time
+    output
   end
 
   def crack(encrypted_message, date)
