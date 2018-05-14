@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'encryptor.rb'
 
 class CipherCalculator
@@ -10,16 +12,16 @@ class CipherCalculator
         number.to_i
       end
     end
-    return rotated_array
+    rotated_array
   end
 
   def offset_date_for_cipher(date)
     if date.class == String
       date = date.to_i
-    else date.class == Date
-      date = date.strftime("%d%m%y").to_i
+    else
+      date = date.strftime('%d%m%y').to_i
     end
-    offset = (date ** 2).to_s.split(//).last(4).join
+    offset = (date**2).to_s.split(//).last(4).join
     offset.each_char.map(&:to_i)
   end
 
@@ -30,6 +32,6 @@ class CipherCalculator
       x += 1
       cipher << key_rotater(key)[x].flatten.join.to_i + offset_date_for_cipher(date)[x]
     end
-    return cipher
+    cipher
   end
 end

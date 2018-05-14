@@ -78,5 +78,4 @@ class EncryptorTest < Minitest::Test
     operator = :-
     assert_equal "hello", e.rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
   end
-
 end

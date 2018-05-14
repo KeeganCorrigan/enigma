@@ -16,12 +16,12 @@ class CrackTest < Minitest::Test
 
   def test_crack_accepts_date
     crack = Crack.new("..end..", Date.new(2018, 5, 12))
-    assert_instance_of Date, crack.time
+    assert_instance_of Date, crack.date
   end
 
   def test_crack_does_not_require_date
     crack = Crack.new("..end..")
-    assert_instance_of Date, crack.time
+    assert_instance_of Date, crack.date
   end
 
   def test_finds_rotated_index_of_one_letter

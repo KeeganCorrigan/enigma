@@ -20,7 +20,7 @@ class Encryptor
     cipher = CipherCalculator.new.create_cipher(key, date)
     message_index = find_message_index_in_char_map(message)
     encrypted_message = rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
-    return encrypted_message
+    encrypted_message
   end
 
   def decrypt
@@ -28,7 +28,7 @@ class Encryptor
     cipher = CipherCalculator.new.create_cipher(key, date)
     message_index = find_message_index_in_char_map(message)
     decrypted_message = rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
-    return decrypted_message
+    decrypted_message
   end
 
   def find_message_index_in_char_map(message)
@@ -38,20 +38,17 @@ class Encryptor
         @char_map[index] == letter
       end
     end
-    return message_index.flatten
+    message_index.flatten
   end
 
   def rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
     altered_message = []
     x = 0
     message_index.map do |number|
-      if x > 3
-        x = 0
-      end
-      altered_message << @char_map[(number.public_send(operator, cipher[x])) % 39]
+      x = 0 if x > 3
+      altered_message << @char_map[number.public_send(operator, cipher[x]) % @char_map.length]
       x += 1
     end
-    return altered_message.join
+    altered_message.join
   end
-
 end
