@@ -26,8 +26,8 @@ class Enigma
     output
   end
 
-  def crack(encrypted_message, date)
-    operator = :+
+  def crack(encrypted_message, date = nil)
+    operator = :-
     cracked_key = Crack.new(encrypted_message).cracker(encrypted_message)
     encryptor = Encryptor.new(encrypted_message)
     reversed = encrypted_message.reverse
