@@ -24,13 +24,13 @@ class CrackTest < Minitest::Test
     assert_instance_of Date, crack.time
   end
 
-  def test_finds_shift_index_of_one_letter
+  def test_finds_rotated_index_of_one_letter
     encrypted_message = "h"
     crack = Crack.new(encrypted_message, Date.new(2018, 5, 12))
     assert_equal [6], crack.cracker(encrypted_message)
   end
 
-  def test_finds_shift_index_of_multiple_letters
+  def test_finds_rotated_index_of_multiple_letters
     encrypted_message = "14iv8iyaais"
     crack = Crack.new(encrypted_message, Date.new(2018, 5, 12))
     assert_equal [13, 3, 29, 19], crack.cracker(encrypted_message)
