@@ -24,18 +24,4 @@ class OffSetCalculatorTest < Minitest::Test
     assert_equal [20, 26, 36, 49], o.create_cipher(e.key, Date.new(2018, 5, 12))
   end
 
-  def test_format_date
-    e = Encryptor.new("yarr", "12345", "2018-05-13")
-    time = "2018-05-13"
-    o = OffSetCalculator.new
-    assert_equal [8, 3, 2, 4], o.cipher_offset_time(time)
-  end
-
-  def test_format_date_works_with_initialized_date
-    e = Encryptor.new("yarr", "12345")
-    time = "2018-05-13"
-    o = OffSetCalculator.new
-    assert_equal [8, 3, 2, 4], o.format_date(time)
-  end
-
 end

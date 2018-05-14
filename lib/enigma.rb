@@ -18,7 +18,7 @@ class Enigma
     output
   end
 
-  def decrypt(my_message, key, date)
+  def decrypt(my_message, key = nil , date = nil)
     encryptor = Encryptor.new(my_message, key, date)
     output = encryptor.decrypt
     @key = encryptor.key
