@@ -16,8 +16,10 @@ class Crack
   def cracker(encrypted_message)
     cracking_template = ['n', 'd', '.', '.']
     last_four_of_message = encrypted_message.split(//).last(4)
+    cracked_cipher =
     last_four_of_message.map.with_index do |letter, index|
       (@char_map.index(letter) - @char_map.index(cracking_template[index])).abs
     end
+    return cracked_cipher
   end
 end
