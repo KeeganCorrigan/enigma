@@ -36,6 +36,4 @@ class CrackTest < Minitest::Test
     assert_equal [13, 3, 29, 19], crack.cracker(encrypted_message)
   end
 
-  # def test_
-
 end

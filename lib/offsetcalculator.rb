@@ -14,9 +14,13 @@ class OffSetCalculator
   end
 
   def cipher_offset_time(time)
-    time = time.strftime("%d%m%y")
-    offset = (time.to_i ** 2).to_s.split(//).last(4).join
-    return offset.each_char.map(&:to_i)
+    if time.class == String
+      time = time.to_i
+    else time.class == Date
+      time = time.strftime("%d%m%y").to_i
+    end
+    offset = (time ** 2).to_s.split(//).last(4).join
+    offset.each_char.map(&:to_i)
   end
 
   def create_cipher(key, time)

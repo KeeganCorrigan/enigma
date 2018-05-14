@@ -21,7 +21,4 @@ class Crack
     end
   end
 
-
-
-
 end

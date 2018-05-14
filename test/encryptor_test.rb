@@ -26,7 +26,7 @@ class EncryptorTest < Minitest::Test
     refute e.key == nil
   end
 
-  def test_encryptor_creates_key_if_none_enetered
+  def test_encryptor_creates_date_if_none_entered
     e = Encryptor.new("hello", "12345")
     refute e.time == nil
     assert_equal Date.today, e.time
@@ -63,6 +63,12 @@ class EncryptorTest < Minitest::Test
     cipher = [20, 26, 36, 49]
     operator = :+
     assert_equal "14iv8", e.rotater(message_index, cipher, operator)
+  end
+
+  def test_date_can_be_entered_as_a_string
+    e = Encryptor.new("hello", "12345", "2018-05-13")
+    assert_equal "2018-05-13", e.time
+    e.decrypt
   end
 
   def test_reverse_rotator
