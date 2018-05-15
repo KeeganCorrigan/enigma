@@ -36,18 +36,23 @@ class CrackTest < Minitest::Test
     assert_equal ["8", "a"], crack.create_array_for_character_comparison_for_cracking(get_last_chars)
   end
 
-  def test_rotate_until_decrypted
-    skip
+  def test_get_position_char_pairs_in_char_map
+    crack = Crack.new("14iv8x8iyaais")
+    char_pair = ["8", "a"]
+    assert_equal [34, 0], crack.encrypted_char_index
+  end
+
+  def test_get_positions_of_cracking_comparison_in_template
+    crack = Crack.new("14iv8x8iyaais")
+    template = [".", ".", "e", "n", "d", ".", "."]
+    assert_equal [37, 13], crack.find_cracked_key_tail
+  end
+
+  def test_reverse_rotation_of_index_pair_until_template_index_match
     crack = Crack.new("14iv8x8iyaais")
     encrypted_message = ["8", "a"]
     assert_equal 36, rotate_until_decrypted(encrypted_message)
   end
-
-  def rotation_guesser
-    skip
-    crack = Crack.new
-  end
-
 end
 
 
