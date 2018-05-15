@@ -22,8 +22,10 @@ class EncryptorTest < Minitest::Test
   end
 
   def test_encryptor_creates_key_if_none_enetered
-    e = Encryptor.new("hello", Date.new(2018, 5, 12))
+    e = Encryptor.new("hello")
     refute e.key == nil
+    assert_equal 5, e.key.length
+    assert_equal String, e.key.class
   end
 
   def test_encryptor_creates_date_if_none_entered
