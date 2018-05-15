@@ -45,10 +45,8 @@ class Encryptor
   def rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
     altered_message = []
     x = 0
-    binding.pry
     message_index.map do |number|
       x = 0 if x > 3
-      binding.pry
       altered_message << @char_map[number.public_send(operator, cipher[x]) % @char_map.length]
       x += 1
     end
