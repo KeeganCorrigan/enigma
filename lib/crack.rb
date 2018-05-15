@@ -21,8 +21,10 @@ class Crack
     (get_last_chars[0] + get_last_chars[4]).split('')
   end
 
-  def rotate_until_decrypted()
-  end
+  # def rotate_until_decrypted(encrypted_message_array)
+  #   decrypted_letters = []
+  #   encrypted_message_array.
+  # end
 end
 
 

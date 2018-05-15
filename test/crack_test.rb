@@ -37,10 +37,16 @@ class CrackTest < Minitest::Test
   end
 
   def test_rotate_until_decrypted
+    skip
     crack = Crack.new("14iv8x8iyaais")
     encrypted_message = ["8", "a"]
     assert_equal 36, rotate_until_decrypted(encrypted_message)
+  end
 
+  def rotation_guesser
+    skip
+    crack = Crack.new
+  end
 
 end
 

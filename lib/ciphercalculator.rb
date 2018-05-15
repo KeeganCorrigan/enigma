@@ -3,16 +3,9 @@
 require_relative 'encryptor.rb'
 
 class CipherCalculator
+
   def key_rotater(key)
-    rotated_array = []
-    x = -1
-    4.times do
-      x += 1
-      rotated_array << (key[0 + x] + key[1 + x]).split('').map do |number|
-        number.to_i
-      end
-    end
-    rotated_array
+    rotated_array = [key[0..1], key[1..2], key[2..3], key[3..4]]
   end
 
   def offset_date_for_cipher(date)
@@ -30,7 +23,7 @@ class CipherCalculator
     x = -1
     4.times do
       x += 1
-      cipher << key_rotater(key)[x].flatten.join.to_i + offset_date_for_cipher(date)[x]
+      cipher << key_rotater(key)[x].to_i + offset_date_for_cipher(date)[x]
     end
     cipher
   end

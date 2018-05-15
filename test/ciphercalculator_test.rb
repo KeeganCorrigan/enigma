@@ -7,7 +7,7 @@ class CipherCalculatorTest < Minitest::Test
   def test_offset_calculator_key_rotater_works_on_a_key
     e = Encryptor.new("yarr", "12345", Date.new(2018, 5, 12))
     o = CipherCalculator.new
-    assert_equal [[1,2],[2,3],[3, 4], [4, 5]], o.key_rotater(e.key)
+    assert_equal ["12", "23", "34", "45"], o.key_rotater(e.key)
   end
 
   def test_generate_date_offset_for_cipher
