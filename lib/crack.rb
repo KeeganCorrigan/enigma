@@ -13,6 +13,15 @@ class Crack
     @date = date || Date.today
   end
 
+  # get encrypted_message.
+  # take last 7 of encrypted message.
+  # turn those into an array.
+  # break into array pairs every 4th letter.
+    # index positions: [0, 4], [1, 5], [2, 6]
+  # find first index positions of pairs in char_map, i.e [8, a] have index positions []
+  # need to build template "..end.." with index positions for [0, 4], which are '.' and 'n'
+  #subtract
+
   def get_last_chars(encrypted_message)
     encrypted_message.split(//).last(7)
   end

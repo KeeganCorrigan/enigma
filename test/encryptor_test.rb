@@ -68,6 +68,7 @@ class EncryptorTest < Minitest::Test
   end
 
   def test_date_can_be_entered_as_a_string
+    skip
     e = Encryptor.new("hello", "12345", "2018-05-13")
     assert_equal "2018-05-13", e.date
     e.decrypt
