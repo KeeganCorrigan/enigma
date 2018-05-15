@@ -61,10 +61,28 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_crack_works_on_longer_encrypted_message
+    skip
     e = Enigma.new
     my_message = "this is so secret ..end.."
     encrypted_message = "a7f2r8ph,b72y2ooax8iyaais"
     actual = e.crack(encrypted_message)
     assert my_message, actual
+  end
+
+  def test_bug_fix_for_crack
+    skip
+    e = Enigma.new
+    my_message = "this is so secret ..end.."
+    encrypted_message = "xwy5bx8kw3n5ir7rxmoli2tlc"
+    actual = e.crack(encrypted_message)
+    assert my_message, actual
+  end
+
+  def test_crack_works_with_encrypt_method
+    skip
+    e = Enigma.new
+    my_message = "this is so secret ..end.."
+    output = e.encrypt(my_message, Date.today)
+    assert_equal my_message, e.crack(output)
   end
 end
