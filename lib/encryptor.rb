@@ -1,6 +1,7 @@
 require_relative 'key.rb'
 require_relative 'ciphercalculator.rb'
 require 'Date'
+require 'pry'
 
 class Encryptor
   attr_reader   :key,

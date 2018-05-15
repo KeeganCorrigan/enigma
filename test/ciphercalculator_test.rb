@@ -23,5 +23,4 @@ class CipherCalculatorTest < Minitest::Test
     o = CipherCalculator.new
     assert_equal [20, 26, 36, 49], o.create_cipher(e.key, Date.new(2018, 5, 12))
   end
-
 end
