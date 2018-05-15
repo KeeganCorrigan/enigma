@@ -14,6 +14,7 @@ class Enigma
     encryptor = Encryptor.new(my_message, key, date)
     output = encryptor.encrypt
     @key = encryptor.key
+    binding.pry
     @date = encryptor.date
     output
   end
@@ -27,7 +28,7 @@ class Enigma
   end
 
   def crack(encrypted_message, date = nil)
-    operator = :-
+    operator = :+
     cracked_key = Crack.new(encrypted_message).cracker(encrypted_message)
     encryptor = Encryptor.new
     reversed = encrypted_message.reverse

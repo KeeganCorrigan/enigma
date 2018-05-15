@@ -53,7 +53,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_crack_works_on_short_encrypted_message
-    skip
     e = Enigma.new
     encrypted_message = "14iv8x8iyaais"
     actual = e.crack(encrypted_message)
@@ -61,7 +60,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_crack_works_on_longer_encrypted_message
-    skip
     e = Enigma.new
     my_message = "this is so secret ..end.."
     encrypted_message = "a7f2r8ph,b72y2ooax8iyaais"
@@ -69,20 +67,23 @@ class EnigmaTest < Minitest::Test
     assert my_message, actual
   end
 
-  def test_bug_fix_for_crack
-    skip
+  def test_crack_works_on_different_words
     e = Enigma.new
-    my_message = "this is so secret ..end.."
-    encrypted_message = "xwy5bx8kw3n5ir7rxmoli2tlc"
-    actual = e.crack(encrypted_message)
-    assert my_message, actual
+    my_message = "this is a test ..end.."
+    output = e.encrypt(my_message, "12345", Date.today)
+    assert my_message, e.crack(output)
   end
 
-  def test_crack_works_with_encrypt_method
-    skip
+  def test_crack_works_without_date_and_key
     e = Enigma.new
-    my_message = "this is so secret ..end.."
-    output = e.encrypt(my_message, Date.today)
-    assert_equal my_message, e.crack(output)
+    my_message = "this is a test too, phareal ..end.."
+    output = e.encrypt(my_message)
+    assert my_message, e.crack(output)
+  end
+
+  def test_crack_works_without_date_and_key_2
+    e = Enigma.new
+    my_message = "umq 1fdxrvixl"
+    assert_equal "hello ..end..", e.crack(my_message)
   end
 end

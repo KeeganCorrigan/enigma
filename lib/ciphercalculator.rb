@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'encryptor.rb'
+require 'pry'
 
 class CipherCalculator
 
@@ -13,7 +14,6 @@ class CipherCalculator
       date = date.to_i
     else
       date = date.strftime('%d%m%y').to_i
-      binding.pry
     end
     offset = (date**2).to_s.split(//).last(4).join
     offset.each_char.map(&:to_i)
@@ -25,7 +25,6 @@ class CipherCalculator
     4.times do
       x += 1
       cipher << key_rotater(key)[x].to_i + offset_date_for_cipher(date)[x]
-      binding.pry
     end
     cipher
   end
