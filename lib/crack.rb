@@ -19,8 +19,9 @@ class Crack
     last_four_of_message = encrypted_message.split(//).last(4)
     cracked_cipher = []
     last_four_of_message.map.with_index do |letter, index|
-      cracked_cipher << (@char_map.index(letter) - @char_map.index(cracking_template[index]))*-1
+      cracked_cipher << (@char_map.index(letter) - @char_map.index(cracking_template[index]))
     end
+    return cracked_cipher
   end
 end
 
