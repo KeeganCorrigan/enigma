@@ -1,8 +1,8 @@
 require_relative 'test_helper'
-require 'pry'
 gem 'minitest', '~> 5.2'
 require './lib/encryptor.rb'
 require './lib/enigma.rb'
+require 'pry'
 
 class EnigmaTest < Minitest::Test
 
@@ -11,7 +11,7 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, e
   end
 
-  def test_gets_encrypted_message
+  def test_enigma_gets_encrypted_message
     e = Enigma.new
     my_message = "hello"
     actual = e.encrypt(my_message, "12345", Date.new(2018, 5, 12))
@@ -52,10 +52,37 @@ class EnigmaTest < Minitest::Test
     assert_equal "this is so secret ..end..", expected
   end
 
-  def test_crack_generates_cracked_key
+  def test_crack_works_on_short_encrypted_message
+    skip
     e = Enigma.new
     encrypted_message = "14iv8x8iyaais"
     actual = e.crack(encrypted_message)
+    assert "hello ..end..", actual
   end
 
+  def test_crack_works_on_longer_encrypted_message
+    skip
+    e = Enigma.new
+    my_message = "this is so secret ..end.."
+    encrypted_message = "a7f2r8ph,b72y2ooax8iyaais"
+    actual = e.crack(encrypted_message)
+    assert my_message, actual
+  end
+
+  def test_bug_fix_for_crack
+    skip
+    e = Enigma.new
+    my_message = "this is so secret ..end.."
+    encrypted_message = "xwy5bx8kw3n5ir7rxmoli2tlc"
+    actual = e.crack(encrypted_message)
+    assert my_message, actual
+  end
+
+  def test_crack_works_with_encrypt_method
+    skip
+    e = Enigma.new
+    my_message = "this is so secret ..end.."
+    output = e.encrypt(my_message, Date.today)
+    assert_equal my_message, e.crack(output)
+  end
 end

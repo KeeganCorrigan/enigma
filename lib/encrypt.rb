@@ -6,4 +6,4 @@ e = Enigma.new
 
 File.write(ARGV[1], e.encrypt(message))
 
-puts "Created 'encrypted.txt' with the key #{e.key} and date #{e.date}"
+puts "Created 'encrypted.txt' with the key #{e.key} and date #{e.date.strftime("%d%m%y")}"

@@ -4,21 +4,22 @@ require 'Date'
 
 class Crack
   attr_reader     :encrypted_message,
-                  :time,
+                  :date,
                   :char_map
 
-  def initialize(encrypted_message, time = nil)
+  def initialize(encrypted_message, date = nil)
+    @char_map = Encryptor.new.char_map
     @encrypted_message = encrypted_message
-    @time = time || Date.today
-    @char_map = (('a'..'z').to_a + ('0'..'9').to_a).push(' ', '.', ',')
+    @date = date || Date.today
   end
 
   def cracker(encrypted_message)
-    template = ['n', 'd', '.', '.']
+    cracking_template = ['n', 'd', '.', '.']
     last_four_of_message = encrypted_message.split(//).last(4)
+    cracked_cipher =
     last_four_of_message.map.with_index do |letter, index|
-      (@char_map.index(letter) - @char_map.index(template[index])).abs
+      (@char_map.index(letter) - @char_map.index(cracking_template[index])).abs
     end
+    return cracked_cipher
   end
-
 end
