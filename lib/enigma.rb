@@ -28,12 +28,15 @@ class Enigma
   end
 
   def crack(encrypted_message, date = nil)
-    operator = :+
+    operator = :-
     cracked_key = Crack.new(encrypted_message).cracker(encrypted_message)
     encryptor = Encryptor.new
     reversed = encrypted_message.reverse
     reversed_message_index_array = encryptor.find_message_index_in_char_map(reversed)
-    decrypted_message = encryptor.rotate_text_to_encrypt_and_decrypt(reversed_message_index_array, cracked_key.reverse, operator)
-    decrypted_message.reverse
+    cracked_message = encryptor.rotate_text_to_encrypt_and_decrypt(reversed_message_index_array, cracked_key.reverse, operator)
+    cracked_message.reverse
   end
 end
+
+# require './lib/enigma.rb'
+# e = Enigma.new
