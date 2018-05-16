@@ -57,27 +57,30 @@ class EncryptorTest < Minitest::Test
   end
 
   def test_message_index_is_correct
-    assert_equal [7, 4, 11, 11, 14], @all_attributes.find_message_index_in_char_map(@all_attributes.message)
-    refute_equal [6, 14, 24, 78, 101], @all_attributes.find_message_index_in_char_map(@all_attributes.message)
+    actual = @all_attributes.find_message_index_in_char_map(@all_attributes.message)
+
+    assert_equal [7, 4, 11, 11, 14], actual
+    refute_equal [6, 14, 24, 78, 101], actual
   end
 
   def test_rotate_text_to_encrypt_and_decrypt
     message_index = [7, 4, 11, 11, 14]
     cipher = [20, 26, 36, 49]
     operator = :+
+
     assert_equal "14iv8", @all_attributes.rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
   end
 
   def test_date_can_be_entered_as_a_string
     e = Encryptor.new("hello", "12345", "2018-05-13")
     assert_equal "2018-05-13", e.date
-    e.decrypt
   end
 
   def test_reverse_rotator
     message_index = [27, 30, 8, 21, 34]
     cipher = [20, 26, 36, 49]
     operator = :-
+
     assert_equal "hello", @all_attributes.rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
   end
 end
