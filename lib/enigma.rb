@@ -12,27 +12,27 @@ class Enigma
 
   def encrypt(my_message, key = nil, date = nil)
     encryptor = Encryptor.new(my_message, key, date)
-    output = encryptor.encrypt
+    cipher_text = encryptor.encrypt
     @key = encryptor.key
     @date = encryptor.date
-    output
+    return cipher_text
   end
 
   def decrypt(my_message, key = nil , date = nil)
     encryptor = Encryptor.new(my_message, key, date)
-    output = encryptor.decrypt
+    plain_text = encryptor.decrypt
     @key = encryptor.key
     @date = encryptor.date
-    output
+    return plain_text
   end
 
   def crack(encrypted_message, date = nil)
     operator = :-
     cracked_key = Crack.new(encrypted_message).cracker(encrypted_message)
     encryptor = Encryptor.new
-    reversed = encrypted_message.reverse
-    reversed_message_index_array = encryptor.find_message_index_in_char_map(reversed)
-    cracked_message = encryptor.rotate_text_to_encrypt_and_decrypt(reversed_message_index_array, cracked_key.reverse, operator)
-    cracked_message.reverse
+    reversed_cipher_text = encrypted_message.reverse
+    reversed_message_index = encryptor.find_message_index_in_char_map(reversed_cipher_text)
+    cracked_message = encryptor.rotate_text_to_encrypt_and_decrypt(reversed_message_index, cracked_key.reverse, operator)
+    return cracked_message.reverse
   end
 end
