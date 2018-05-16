@@ -54,6 +54,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_encrypts_and_then_decrypts_without_key_and_date
+    skip
     expected = @e.decrypt(@encrypted)
 
     assert_equal @secret, expected
@@ -69,7 +70,7 @@ class EnigmaTest < Minitest::Test
   def test_crack_works_on_longer_encrypted_message
     encrypted_message = "a7f2r8ph,b72y2ooax8iyaais"
     actual = @e.crack(encrypted_message)
-    
+
     assert @secret, actual
   end
 
