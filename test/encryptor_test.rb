@@ -18,6 +18,11 @@ class EncryptorTest < Minitest::Test
     assert_equal '12345', @all_attributes.key
   end
 
+  def test_encryptor_accepts_input_key_with_beginning_zero
+    e = Encryptor.new('hello', '02345')
+    assert_equal '02345', e.key
+  end
+
   def test_encryptor_accepts_message
     assert_equal 'hello', @all_attributes.message
   end
