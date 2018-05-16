@@ -31,13 +31,13 @@ class Enigma
   def crack(encrypted_message, date = nil)
     operator = :-
     crack = Cracker.new(encrypted_message, date)
-    cracked = crack.cracker(encrypted_message)
+    cipher = crack.cracker(encrypted_message)
     @cracked_key = crack.brute_force_encryption_key(encrypted_message)
     encryptor = Encryptor.new
     reversed_message_index = encryptor.find_message_index_in_char_map(encrypted_message.reverse)
     cracked_message = encryptor.rotate_text_to_encrypt_and_decrypt(
       reversed_message_index,
-      cracked.reverse,
+      cipher.reverse,
       operator
     )
     cracked_message.reverse
