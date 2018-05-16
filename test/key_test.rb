@@ -16,4 +16,9 @@ class KeyTest < Minitest::Test
     assert_equal 5, k.generate_key.length
     assert_equal String, k.generate_key.class
   end
+
+  def test_it_does_not_generate_key_when_key_is_entered
+    e = Enigma.new
+    e.encrypt("top secret ..end..", "12345", Date.new(2018, 5, 12))
+    
 end

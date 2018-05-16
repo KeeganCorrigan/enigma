@@ -19,7 +19,17 @@ class EnigmaTest < Minitest::Test
     refute_equal "14i99", actual
   end
 
-  def test_gets_encrypted_message_without_key
+  def test_enigma_gets_key
+    e = Enigma.new("12345")
+    assert_equal "12345", e.key
+  end
+
+  def test_enigma_gets_date
+    e = Enigma.new("12345", Date.new(2018, 5, 12))
+    assert_equal Date, e.date.class
+  end
+
+  def test_encrypt_works_on_message_without_key
     e = Enigma.new
     my_message = "this is so secret ..end.."
     actual = e.encrypt(my_message)
@@ -27,7 +37,14 @@ class EnigmaTest < Minitest::Test
     assert_equal String, actual.class
   end
 
-  def test_gets_encrypted_message
+  def test_encrypt_works_on_short_message
+    e = Enigma.new
+    my_message = "ee"
+    actual = e.encrypt(my_message, "12345", Date.new(2018, 5, 12))
+    assert_equal "y4", actual
+  end
+
+  def test_decrypt_works_on_message
     e = Enigma.new
     my_message = "14iv8"
     actual = e.decrypt(my_message, "12345", Date.new(2018, 5, 12))
@@ -35,7 +52,14 @@ class EnigmaTest < Minitest::Test
     refute_equal "hell0", actual
   end
 
-  def test_gets_encrypted_message_without_key
+  def test_decrypt_works_on_short_message
+    e = Enigma.new
+    my_message = "y4"
+    actual = e.decrypt(my_message, "12345", Date.new(2018, 5, 12))
+    assert_equal "ee", actual
+  end
+
+  def test_decryppt_gets_encrypted_message_without_key
     e = Enigma.new
     my_message = "lksjfdbnvklajsdnvlkajsbd"
     actual = e.decrypt(my_message)

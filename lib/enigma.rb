@@ -36,6 +36,3 @@ class Enigma
     cracked_message.reverse
   end
 end
-
-# require './lib/enigma.rb'
-# e = Enigma.new
