@@ -39,10 +39,22 @@ class EnigmaTest < Minitest::Test
   def test_decrypts_without_key
     my_message = "lksjfdbnvklajsdnvlkajsbd"
     actual = @e.decrypt(my_message)
-
-    assert_equal 24, actual.length
+  end
+  
+  def test_encrypt_works_on_short_message
+    e = Enigma.new
+    my_message = 'ee'
+    actual = e.encrypt(my_message, '12345', Date.new(2018, 5, 12))
+    assert_equal 'y4', actual
   end
 
+  def test_decrypt_works_on_short_message
+    e = Enigma.new
+    my_message = 'y4'
+    actual = e.decrypt(my_message, '12345', Date.new(2018, 5, 12))
+    assert_equal 'ee', actual
+  end
+  
   def test_encrypts_and_then_decrypts_with_key_and_date
     actual = @e.encrypt(@secret, "12345", Date.new(2018, 5, 12))
 

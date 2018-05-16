@@ -1,8 +1,8 @@
-require_relative 'encryptor.rb'
+require './lib/encryptor.rb'
 
 class Key
   def generate_key
     key = ''
-    key << rand(10000..99999).to_s
+    key << rand(10_000..99_999).to_s
   end
 end

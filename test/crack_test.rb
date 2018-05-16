@@ -2,6 +2,7 @@ require_relative 'test_helper'
 require './lib/cracker.rb'
 require './lib/encryptor.rb'
 
+
 class CrackerTest < Minitest::Test
 
   def test_crack_exists
@@ -16,6 +17,7 @@ class CrackerTest < Minitest::Test
 
   def test_crack_accepts_date
     crack = Cracker.new("..end..", Date.new(2018, 5, 12))
+
     assert_instance_of Date, crack.date
   end
 
@@ -30,29 +32,26 @@ class CrackerTest < Minitest::Test
     assert_equal [-13, -3, -29, -19], crack.cracker(encrypted_message)
   end
 
-  def test_brute_force_method_returns_key
-    skip
+  def test_brute_force_encryption_key_returns_key
     encrypted_message = "0sy07llnx1qnr"
     crack = Cracker.new(encrypted_message)
-    assert_equal "11111", crack.brute_force(encrypted_message)
+    assert_equal "11111", crack.brute_force_encryption_key(encrypted_message)
   end
 
-  def test_brute_force_method_returns_key_on_longer_string
-    skip
+  def test_brute_force_encryption_key_returns_key_on_longer_string
     e = Enigma.new
     message = "this is so secret ..end.."
     output = e.encrypt("this is so secret ..end..", "75849")
     crack = Cracker.new(output)
-    assert_equal "75849", crack.brute_force(output)
+    assert_equal "75849", crack.brute_force_encryption_key(output)
   end
 
-  def test_brute_force_method_works_on_automatically_generated_key
-    skip
+  def test_brute_force_encryption_key_works_on_automatically_generated_key
     e = Enigma.new
     message = "this is so secret ..end.."
     output = e.encrypt("this is so secret ..end..")
     crack = Cracker.new(output)
-    decryption_key = crack.brute_force(output)
+    decryption_key = crack.brute_force_encryption_key(output)
     assert_equal "this is so secret ..end..", e.decrypt(output, decryption_key)
   end
 end

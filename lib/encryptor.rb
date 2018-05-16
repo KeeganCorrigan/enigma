@@ -1,6 +1,6 @@
-require_relative 'key.rb'
-require_relative 'ciphercalculator.rb'
-require 'Date'
+require './lib/key'
+require './lib/ciphercalculator'
+require 'date'
 
 class Encryptor
   attr_reader   :key,
@@ -19,7 +19,11 @@ class Encryptor
     operator = :+
     cipher = CipherCalculator.new.create_cipher(key, date)
     message_index = find_message_index_in_char_map(message)
-    encrypted_message = rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
+    encrypted_message = rotate_text_to_encrypt_and_decrypt(
+      message_index,
+      cipher,
+      operator
+    )
     encrypted_message
   end
 
@@ -27,8 +31,23 @@ class Encryptor
     operator = :-
     cipher = CipherCalculator.new.create_cipher(key, date)
     message_index = find_message_index_in_char_map(message)
-    decrypted_message = rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
+    decrypted_message = rotate_text_to_encrypt_and_decrypt(
+      message_index,
+      cipher,
+      operator
+    )
     decrypted_message
+  end
+
+  def rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
+    message = []
+    x = 0
+    message_index.each do |number|
+      x = 0 if x > 3
+      message << @char_map[number.public_send(operator, cipher[x]) % @char_map.length]
+      x += 1
+    end
+    message.join
   end
 
   def find_message_index_in_char_map(message)
@@ -39,16 +58,5 @@ class Encryptor
       end
     end
     message_index.flatten
-  end
-
-  def rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
-    altered_message = []
-    x = 0
-    message_index.map do |number|
-      x = 0 if x > 3
-      altered_message << @char_map[number.public_send(operator, cipher[x]) % @char_map.length]
-      x += 1
-    end
-    altered_message.join
   end
 end
