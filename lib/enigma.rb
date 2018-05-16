@@ -1,5 +1,5 @@
 require_relative 'encryptor.rb'
-require_relative 'crack.rb'
+require_relative 'cracker.rb'
 
 class Enigma
   attr_reader :key,
@@ -30,7 +30,7 @@ class Enigma
 
   def crack(encrypted_message, date = nil)
     operator = :-
-    crack = Crack.new(encrypted_message)
+    crack = Cracker.new(encrypted_message)
     cracked = crack.cracker(encrypted_message)
     @cracked_key = crack.brute_force(encrypted_message)
     encryptor = Encryptor.new
