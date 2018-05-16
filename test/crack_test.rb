@@ -30,9 +30,26 @@ class CrackTest < Minitest::Test
     assert_equal [-13, -3, -29, -19], crack.cracker(encrypted_message)
   end
 
-  def test_brute_force_method
-    encrypted_message = "14iv8iyaais"
+  def test_brute_force_method_returns_key
+    encrypted_message = "0sy07llnx1qnr"
     crack = Crack.new(encrypted_message)
-    assert_equal "hello ..end..", crack.brute_force(encrypted_message)
+    assert_equal "11111", crack.brute_force(encrypted_message)
+  end
+
+  def test_brute_force_method_returns_key_on_longer_string
+    e = Enigma.new
+    message = "this is so secret ..end.."
+    output = e.encrypt("this is so secret ..end..", "75849")
+    crack = Crack.new(output)
+    assert_equal "75849", crack.brute_force(output)
+  end
+
+  def test_brute_force_method_works_on_automatically_generated_key
+    e = Enigma.new
+    message = "this is so secret ..end.."
+    output = e.encrypt("this is so secret ..end..")
+    crack = Crack.new(output)
+    decryption_key = crack.brute_force(output)
+    assert_equal "this is so secret ..end..", e.decrypt(output, decryption_key)
   end
 end
