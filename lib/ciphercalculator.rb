@@ -1,4 +1,4 @@
-require_relative 'encryptor.rb'
+require './lib/encryptor.rb'
 
 class CipherCalculator
   def create_cipher(key, date)

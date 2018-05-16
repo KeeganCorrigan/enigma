@@ -1,5 +1,5 @@
 gem 'minitest', '~> 5.2'
-require_relative 'test_helper'
+require './test/test_helper'
 require './lib/key.rb'
 
 class KeyTest < Minitest::Test

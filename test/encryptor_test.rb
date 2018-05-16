@@ -1,13 +1,12 @@
 gem 'minitest', '~> 5.2'
-require_relative 'test_helper'
+require './test/test_helper'
 require './lib/encryptor.rb'
 
 class EncryptorTest < Minitest::Test
-
   def setup
-    @all_attributes  = Encryptor.new("hello", "12345", Date.new(2018, 5, 12))
-    @message_and_key = Encryptor.new("hello", "12345")
-    @just_message    = Encryptor.new("hello")
+    @all_attributes  = Encryptor.new('hello', '12345', Date.new(2018, 5, 12))
+    @message_and_key = Encryptor.new('hello', '12345')
+    @just_message    = Encryptor.new('hello')
   end
 
   def test_it_exists
@@ -62,7 +61,6 @@ class EncryptorTest < Minitest::Test
 
   def test_message_index_is_correct
     actual = @all_attributes.find_message_index_in_char_map(@all_attributes.message)
-
     assert_equal [7, 4, 11, 11, 14], actual
     refute_equal [6, 14, 24, 78, 101], actual
   end
@@ -71,16 +69,14 @@ class EncryptorTest < Minitest::Test
     message_index = [7, 4, 11, 11, 14]
     cipher = [20, 26, 36, 49]
     operator = :+
-
-    assert_equal "14iv8", @all_attributes.rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
+    assert_equal '14iv8', @all_attributes.rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
   end
-  
+
   def test_reverse_rotation_for_decrypt
     message_index = [27, 30, 8, 21, 34]
     cipher = [20, 26, 36, 49]
     operator = :-
-
-    assert_equal "hello", @all_attributes.rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
+    assert_equal 'hello', @all_attributes.rotate_text_to_encrypt_and_decrypt(message_index, cipher, operator)
   end
 
   def test_it_encrypts
