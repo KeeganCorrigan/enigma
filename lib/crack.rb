@@ -7,12 +7,14 @@ class Crack
                   :date,
                   :char_map,
                   :template,
-                  :key
+                  :key,
+                  :cracked_key
 
   def initialize(encrypted_message, date = nil)
     @char_map = Encryptor.new.char_map
     @encrypted_message = encrypted_message
     @date = date || Date.today
+    @cracked_key = nil
   end
 
   def cracker(encrypted_message)
@@ -31,6 +33,6 @@ class Crack
     until crack.decrypt(encrypted_message, key).split(//).last(7).join == "..end.."
       key = (key.to_i + 1).to_s.rjust(5, "0")
     end
-    key
+    @cracked_key = key
   end
 end
