@@ -3,6 +3,9 @@ require './lib/encryptor.rb'
 class Key
   def generate_key
     key = ''
-    key << rand(10_000..99_999).to_s
+    5.times do
+      key << ('0'..'9').to_a.sample
+    end
+    key
   end
 end

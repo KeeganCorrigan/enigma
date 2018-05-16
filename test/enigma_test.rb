@@ -25,6 +25,18 @@ class EnigmaTest < Minitest::Test
     assert_equal 25, @encrypted.length
   end
 
+  def test_encrypts_message_with_key_starting_with_zero
+    my_message = 'hello'
+    actual = @e.encrypt(my_message, '02345', Date.new(2018, 5, 12))
+    assert_equal 'r4ivy', actual
+  end
+
+  def tet_decrypts_message_with_key_starting_with_zero
+    my_message = 'r4ivy'
+    actual = @e.decrypt(my_message, '02345', Date.new(2018, 5, 12))
+    assert_equal 'hello', actual
+  end
+
   def test_decrypts_short_encrypted_message
     my_message = '14iv8'
     actual = @e.decrypt(my_message, '12345', Date.new(2018, 5, 12))
