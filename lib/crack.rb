@@ -28,9 +28,8 @@ class Crack
   def brute_force(encrypted_message)
     key = "00000"
     crack = Enigma.new
-    until encrypted_message.split(//).last(7).join == "..end.."
+    until crack.decrypt(encrypted_message, key).split(//).last(7).join == "..end.."
       key = (key.to_i + 1).to_s.rjust(5, "0")
-      crack.decrypt(encrypted_message, key)
       p key
     end
     puts key
