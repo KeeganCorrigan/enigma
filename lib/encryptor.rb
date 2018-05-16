@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require './lib/key'
 require './lib/ciphercalculator'
 require 'Date'

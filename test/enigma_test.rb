@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'test_helper'
 gem 'minitest', '~> 5.2'
 require './lib/encryptor.rb'
