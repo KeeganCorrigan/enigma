@@ -1,5 +1,4 @@
 require_relative 'encryptor.rb'
-require 'pry'
 
 class CipherCalculator
   def create_cipher(key, date)

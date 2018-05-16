@@ -15,7 +15,7 @@ class Enigma
     cipher_text = encryptor.encrypt
     @key = encryptor.key
     @date = encryptor.date
-    return cipher_text
+    cipher_text
   end
 
   def decrypt(my_message, key = nil , date = nil)
@@ -23,7 +23,7 @@ class Enigma
     plain_text = encryptor.decrypt
     @key = encryptor.key
     @date = encryptor.date
-    return plain_text
+    plain_text
   end
 
   def crack(encrypted_message, date = nil)
@@ -33,6 +33,6 @@ class Enigma
     reversed_cipher_text = encrypted_message.reverse
     reversed_message_index = encryptor.find_message_index_in_char_map(reversed_cipher_text)
     cracked_message = encryptor.rotate_text_to_encrypt_and_decrypt(reversed_message_index, cracked_key.reverse, operator)
-    return cracked_message.reverse
+    cracked_message.reverse
   end
 end

@@ -1,4 +1,3 @@
-require 'pry'
 gem 'minitest', '~> 5.2'
 require_relative 'test_helper'
 require './lib/encryptor.rb'

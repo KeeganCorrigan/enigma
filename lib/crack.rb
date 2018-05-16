@@ -25,7 +25,7 @@ class Crack
     cracked_cipher
   end
 
-  def brute_force(encrypted_message)
+  def brute_force_encryption_key(encrypted_message)
     key = '00000'
     crack = Enigma.new
     until crack.decrypt(encrypted_message, key).split(//).last(7).join == '..end..'

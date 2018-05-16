@@ -1,7 +1,6 @@
 require './lib/key'
 require './lib/ciphercalculator'
-require 'Date'
-require 'pry'
+require 'date'
 
 class Encryptor
   attr_reader   :key,
