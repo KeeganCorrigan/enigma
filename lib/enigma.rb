@@ -32,11 +32,11 @@ class Enigma
     operator = :-
     crack = Cracker.new(encrypted_message)
     cracked = crack.cracker(encrypted_message)
-    @cracked_key = crack.brute_force(encrypted_message)
+    @cracked_key = crack.brute_force_encryption_key(encrypted_message)
     encryptor = Encryptor.new
     reversed_cipher_text = encrypted_message.reverse
     reversed_message_index = encryptor.find_message_index_in_char_map(reversed_cipher_text)
-    cracked_message = encryptor.rotate_text_to_encrypt_and_decrypt(reversed_message_index, cracked_key.reverse, operator)
+    cracked_message = encryptor.rotate_text_to_encrypt_and_decrypt(reversed_message_index, cracked.reverse, operator)
     cracked_message.reverse
   end
 end
