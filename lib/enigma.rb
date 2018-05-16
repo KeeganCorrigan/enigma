@@ -14,7 +14,6 @@ class Enigma
     encryptor = Encryptor.new(my_message, key, date)
     output = encryptor.encrypt
     @key = encryptor.key
-    binding.pry
     @date = encryptor.date
     output
   end

@@ -30,8 +30,7 @@ class Crack
     crack = Enigma.new
     until crack.decrypt(encrypted_message, key).split(//).last(7).join == "..end.."
       key = (key.to_i + 1).to_s.rjust(5, "0")
-      p key
     end
-    puts key
+    key
   end
 end
