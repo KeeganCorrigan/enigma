@@ -33,16 +33,14 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_encrypt_works_on_short_message
-    e = Enigma.new
     my_message = 'ee'
-    actual = e.encrypt(my_message, '12345', Date.new(2018, 5, 12))
+    actual = @e.encrypt(my_message, '12345', Date.new(2018, 5, 12))
     assert_equal 'y4', actual
   end
 
   def test_decrypt_works_on_short_message
-    e = Enigma.new
     my_message = 'y4'
-    actual = e.decrypt(my_message, '12345', Date.new(2018, 5, 12))
+    actual = @e.decrypt(my_message, '12345', Date.new(2018, 5, 12))
     assert_equal 'ee', actual
   end
 
@@ -63,6 +61,12 @@ class EnigmaTest < Minitest::Test
     encrypted_message = 'a7f2r8ph,b72y2ooax8iyaais'
     actual = @e.crack(encrypted_message)
     assert @secret, actual
+  end
+
+  def test_crack_gives_back_cracked_key
+    encrypted_message = 'a7f2r8ph,b72y2ooax8iyaais'
+    actual = @e.crack(encrypted_message)
+    assert_equal '12345', @e.cracked_key
   end
 
   def test_crack_works_on_different_words
