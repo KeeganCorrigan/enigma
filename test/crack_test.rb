@@ -27,6 +27,12 @@ class CrackTest < Minitest::Test
   def test_cracker_finds_cipher_index
     encrypted_message = "14iv8iyaais"
     crack = Crack.new(encrypted_message, Date.new(2018, 5, 12))
-    assert_equal [13, 3, 29, 19], crack.cracker(encrypted_message)
+    assert_equal [-13, -3, -29, -19], crack.cracker(encrypted_message)
+  end
+
+  def test_brute_force_method
+    encrypted_message = "14iv8iyaais"
+    crack = Crack.new(encrypted_message)
+    assert_equal "hello ..end..", crack.brute_force(encrypted_message)
   end
 end
